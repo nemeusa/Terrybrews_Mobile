@@ -50,7 +50,7 @@ public class Client : MonoBehaviour
         {
             dir = _servePoint.transform.position - transform.position;
             dir3 = new Vector3(dir.x, dir3.y, 0);
-            Debug.Log(dir.magnitude);
+            //Debug.Log(dir.magnitude);
             transform.position += dir3 * _speed * Time.deltaTime;
         }
         if (Mathf.Abs(dir.x) < 0.1f && !_served)
@@ -67,32 +67,25 @@ public class Client : MonoBehaviour
             Debug.Log("se va");
             _isOrdering = false;
             _served = true;
-            //transform.forward = dirEnter;
-            //transform.position += (dirEnter * _speed * Time.deltaTime);
+            ////transform.forward = dirEnter;
+            ////transform.position += (dirEnter * _speed * Time.deltaTime);
 
-            //transform.forward = -dir;
-            transform.position = new Vector3(transform.position.x + _intoExit * (_exitSpeed * Time.deltaTime), transform.position.y, transform.position.z);
-            //Debug.Log(transform.position + _intoExit * dir * _speed * Time.deltaTime);
-            //Destroy(gameObject, 10);
-            if (transform.position.x >= 11)
-            {
-                _orderTimer = 0;
-
-                entrando();
-                // Debug.Log("vuelve");
-                _served = false;
-            }
-        }
-        if (transform.position.x >= 0.6 && !_served || _orderTimer <= 0 && !_served)
-        {
-            entrando();
-            //Debug.Log("entrando");
+            ////transform.forward = -dir;
+            //transform.position = new Vector3(transform.position.x + _intoExit * (_exitSpeed * Time.deltaTime), transform.position.y, transform.position.z);
+            //Debug.Log(transform.position);
+            ////Destroy(gameObject, 10);
+            ///
+            dir = _servePoint.transform.position + transform.position;
+            dir3 = new Vector3(dir.x, dir3.y, 0);
+            //Debug.Log(dir.magnitude);
+            transform.position += _intoExit * (dir3 * _speed * Time.deltaTime);
         }
     }
 
     void entrando()
     {
-        transform.forward = dir;
+            Debug.Log("entrando");
+        //transform.forward = dir;
         //transform.position += (dir * _speed * Time.deltaTime);
     }
 
