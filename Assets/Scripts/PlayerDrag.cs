@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -9,6 +6,9 @@ public class PlayerDrag : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoi
     private Rigidbody2D _objectRb;
     [SerializeField] private float _lerpSpeed = 5f;
     private bool _isDragging = false;
+    [SerializeField] Transform _drinkPos;
+
+    private Vector2 _velocity = Vector2.zero;
 
     private Vector2 _worldPosition;
 
@@ -20,23 +20,29 @@ public class PlayerDrag : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoi
     private void Start()
     {
         _objectRb.freezeRotation = true;
+        ResetDrinkPosition();
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        //float z = Camera.main.WorldToScreenPoint(eventData.position).y;
-        //Vector2 pointPosition = new Vector2(eventData.position.x, z);
-        //_worldPosition = Camera.main.ScreenToWorldPoint(pointPosition);
+        Vector3 mouseScreenPosition = new Vector3(
+        eventData.position.x,
+        eventData.position.y,
+        Mathf.Abs(Camera.main.transform.position.z - transform.position.z));
 
-        _worldPosition = Camera.main.ScreenToWorldPoint(new Vector3(eventData.position.x, eventData.position.y, 0f));
-
+        Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(mouseScreenPosition);
+        _worldPosition = new Vector2(mouseWorldPosition.x, mouseWorldPosition.y);
         Debug.Log("Dragging");
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        Vector3 mouseScreenPosition = new Vector3(eventData.position.x, eventData.position.y, Mathf.Abs(Camera.main.transform.position.z - transform.position.z));
+
+        Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(mouseScreenPosition);
+        _worldPosition = new Vector2(mouseWorldPosition.x, mouseWorldPosition.y);
+
         _isDragging = true;
-        //_objectRb.useGravity = false;
         _objectRb.gravityScale = 0;
         _objectRb.isKinematic = true;
         Debug.Log("Click");
@@ -44,8 +50,8 @@ public class PlayerDrag : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoi
 
     public void OnPointerUp(PointerEventData eventData)
     {
+        ResetDrinkPosition();
         _isDragging = false;
-        //_objectRb.useGravity = true;
         _objectRb.gravityScale = 1;
         _objectRb.isKinematic = false;
         Debug.Log("Soltar Click");
@@ -55,8 +61,14 @@ public class PlayerDrag : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoi
     {
         if (_isDragging)
         {
-            Vector2 newPosition = Vector2.Lerp(transform.position, _worldPosition, Time.fixedDeltaTime * _lerpSpeed);
+            Vector2 newPosition = Vector2.SmoothDamp(transform.position, _worldPosition, ref _velocity, _lerpSpeed);
             _objectRb.MovePosition(newPosition);
         }
+    }
+
+    private void ResetDrinkPosition()
+    {
+        transform.position = _drinkPos.position;
+        _objectRb.velocity = Vector2.zero;
     }
 }

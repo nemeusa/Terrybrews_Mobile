@@ -29,10 +29,7 @@ public class Client : MonoBehaviour
     {
         _intoExit = Random.Range(0, 2) == 0 ? -1 : 1;
         _isEnter = true;
-    }
 
-    void Update()
-    {
         if (_intoExit == -1)
         {
             imposter = true;
@@ -45,9 +42,13 @@ public class Client : MonoBehaviour
             // Debug.Log("tipo bueno");
             ColorXD();
         }
+    }
 
+    void Update()
+    {
         if (_isEnter)
         {
+            Debug.Log("ENTRA");
             dir = _servePoint.transform.position - transform.position;
             dir3 = new Vector3(dir.x, dir3.y, 0);
             //Debug.Log(dir.magnitude);
@@ -78,7 +79,7 @@ public class Client : MonoBehaviour
             dir = _servePoint.transform.position + transform.position;
             dir3 = new Vector3(dir.x, dir3.y, 0);
             //Debug.Log(dir.magnitude);
-            transform.position += _intoExit * (dir3 * _speed * Time.deltaTime);
+            transform.position += dir3 * _exitSpeed * Time.deltaTime;
         }
     }
 
@@ -93,6 +94,5 @@ public class Client : MonoBehaviour
     void ColorXD()
     {
         GetComponent<Renderer>().material.color = buenoColor;
-
     }
 }
