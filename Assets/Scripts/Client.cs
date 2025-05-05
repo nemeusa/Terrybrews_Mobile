@@ -18,6 +18,7 @@ public class Client : MonoBehaviour
     public bool _isOrdering;
     [SerializeField] bool quieto;
 
+    public DrinkType wishDrink;
 
 
     Vector2 dir;
@@ -94,9 +95,16 @@ public class Client : MonoBehaviour
         }
     }
 
-    public void ReceiveDrink()
+    public void ReceiveDrink(Drink drink)
     {
-        Debug.Log("Cliente recibió la bebida.");
+        if (drink.drinkType == wishDrink)
+        {
+            Debug.Log("Cliente recibió la bebida correcta: " + drink.drinkType);
+        }
+        else
+        {
+            Debug.Log("¡Bebida incorrecta! Esperaba: " + wishDrink);
+        }
     }
 
     void entrando()

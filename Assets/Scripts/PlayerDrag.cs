@@ -1,4 +1,3 @@
-using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -7,7 +6,7 @@ public class PlayerDrag : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoi
 
     [Header("move object")]
     [SerializeField] private float _lerpSpeed = 5f;
-    [SerializeField] Transform _drinkPos;
+   // [SerializeField] Transform _drinkPos;
     private Rigidbody2D _objectRb;
     private bool _isDragging = false;
     private Vector2 _velocity = Vector2.zero;
@@ -15,10 +14,11 @@ public class PlayerDrag : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoi
 
 
 
-    [Header("deliver drink")]
-    private bool _isOverClient = false;
-    private GameObject _clienteActual = null;
-    public Client _client;
+    //[Header("deliver drink")]
+    //private bool _isOverClient = false;
+    //private GameObject _clienteActual = null;
+    //public Client _client;
+    [SerializeField] Drink _drink;
 
 
     private void Awake()
@@ -29,7 +29,6 @@ public class PlayerDrag : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoi
     private void Start()
     {
         _objectRb.freezeRotation = true;
-        ResetDrinkPosition();
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -59,8 +58,8 @@ public class PlayerDrag : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoi
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        GetDrink();
-        ResetDrinkPosition();
+        _drink.GetDrink();
+        _drink.ResetDrinkPosition();
         _isDragging = false;
         //_objectRb.gravityScale = 1;
         //_objectRb.isKinematic = false;
@@ -73,46 +72,6 @@ public class PlayerDrag : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoi
         {
             Vector2 newPosition = Vector2.SmoothDamp(transform.position, _worldPosition, ref _velocity, _lerpSpeed);
             _objectRb.MovePosition(newPosition);
-        }
-    }
-
-    private void ResetDrinkPosition()
-    {
-        transform.position = _drinkPos.position;
-        _objectRb.velocity = Vector2.zero;
-    }
-
-    void GetDrink()
-    {
-        if (_clienteActual != null)
-        {
-            _client.ReceiveDrink();
-            Debug.Log("¡Bebida entregada al cliente!");
-
-            Destroy(gameObject);
-        }
-        else
-        {
-            ResetDrinkPosition();
-        }
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        Client client = other.GetComponent<Client>();
-        if (client != null)
-        {
-            _clienteActual = client.gameObject;
-            _isOverClient = true;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.GetComponent<Client>() != null && _clienteActual != null)
-        {
-            _isOverClient = false;
-            _clienteActual = null;
         }
     }
 }

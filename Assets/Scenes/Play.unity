@@ -245,6 +245,7 @@ MonoBehaviour:
   imposter: 0
   _isOrdering: 0
   quieto: 0
+  wishDrink: 1
   nuevoColor: {r: 1, g: 0, b: 0, a: 1}
   buenoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!212 &345550088
@@ -372,6 +373,7 @@ GameObject:
   - component: {fileID: 463635620}
   - component: {fileID: 463635623}
   - component: {fileID: 463635624}
+  - component: {fileID: 463635625}
   m_Layer: 0
   m_Name: water
   m_TagString: Untagged
@@ -392,8 +394,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _lerpSpeed: 0.1
-  _drinkPos: {fileID: 1520892721}
-  _client: {fileID: 345550087}
+  _drink: {fileID: 463635625}
 --- !u!212 &463635621
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -533,6 +534,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &463635625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 463635619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0185f489c842f0449dfb7e8a2941fc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _drinkPos: {fileID: 1520892721}
+  drinkType: 0
+  _client: {fileID: 345550087}
 --- !u!1 &679024836
 GameObject:
   m_ObjectHideFlags: 0
@@ -1071,6 +1087,7 @@ GameObject:
   - component: {fileID: 1571093563}
   - component: {fileID: 1571093566}
   - component: {fileID: 1571093567}
+  - component: {fileID: 1571093568}
   m_Layer: 0
   m_Name: coca
   m_TagString: Untagged
@@ -1091,8 +1108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _lerpSpeed: 0.1
-  _drinkPos: {fileID: 679024837}
-  _client: {fileID: 345550087}
+  _drink: {fileID: 1571093568}
 --- !u!212 &1571093564
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1232,6 +1248,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1571093568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1571093562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0185f489c842f0449dfb7e8a2941fc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _drinkPos: {fileID: 679024837}
+  drinkType: 1
+  _client: {fileID: 345550087}
 --- !u!1 &1621996010
 GameObject:
   m_ObjectHideFlags: 0
