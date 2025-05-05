@@ -7,7 +7,7 @@ public class Client : MonoBehaviour
     [SerializeField] float _speed;
     [SerializeField] float _exitSpeed;
     [SerializeField] float _orderingTime;
-    [SerializeField] float _orderTimer;
+    private float _orderTimer;
     [SerializeField] Transform _servePoint;
     //[SerializeField] Transform _enterPoint;
     //[SerializeField] GameObject pedidoTexto;
@@ -16,6 +16,8 @@ public class Client : MonoBehaviour
     bool _isEnter;
     bool _served;
     public bool _isOrdering;
+    [SerializeField] bool quieto;
+
 
 
     Vector2 dir;
@@ -45,6 +47,15 @@ public class Client : MonoBehaviour
     }
 
     void Update()
+    {
+        if (!quieto) ClientMove();
+        else
+        {
+            transform.position = Vector3.zero;
+        }
+    }
+
+    void ClientMove()
     {
         if (_isEnter)
         {
@@ -83,9 +94,14 @@ public class Client : MonoBehaviour
         }
     }
 
+    public void ReceiveDrink()
+    {
+        Debug.Log("Cliente recibió la bebida.");
+    }
+
     void entrando()
     {
-            Debug.Log("entrando");
+        Debug.Log("entrando");
         //transform.forward = dir;
         //transform.position += (dir * _speed * Time.deltaTime);
     }
