@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: DefaultCompany
-  productName: Terrybrews mobile
+  productName: 'Terrybrews '
   defaultCursor: {fileID: 2800000, guid: 49ea3ee03d534df45b8744e0e1d4652f, type: 3}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -42,11 +42,11 @@ PlayerSettings:
   m_SplashScreenLogos:
   - logo: {fileID: 10404, guid: 0000000000000000f000000000000000, type: 0}
     duration: 2
-  - logo: {fileID: 21300000, guid: 9dd47c19fbd8b8d42ae38712db274cd4, type: 3}
+  - logo: {fileID: 21300000, guid: d2c15e7d137a5e54598243b2eb33e856, type: 3}
     duration: 3
-  - logo: {fileID: 21300000, guid: eb91de7b19a1e054490edfdaaa8a47f8, type: 3}
+  - logo: {fileID: 21300000, guid: 971d26f50e02beb4aa206e9c2ca356e4, type: 3}
     duration: 3
-  - logo: {fileID: 21300000, guid: ab138e3af873d2248a1f98882439758a, type: 3}
+  - logo: {fileID: 21300000, guid: dbc8f2904c7685046862aee5a1855b0e, type: 3}
     duration: 3
   - logo: {fileID: 21300000, guid: 53f225798c6cd7346940e59f41e02247, type: 3}
     duration: 5
