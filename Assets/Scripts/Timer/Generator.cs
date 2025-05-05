@@ -26,9 +26,15 @@ public class Generator : MonoBehaviour, IPointerClickHandler
     [Header("Lista de Objetos")]
     private List<GameObject> objetosGenerados = new List<GameObject>();
 
+    [Header("Unity Cloud")]
+    public bool ndGenerator = false;
     private void Start()
     {
         StartCoroutine(SpawnObjects());
+        if (!(ndGenerator = false))
+        {
+            gameObject.SetActive(true);
+        }
     }
 
     private IEnumerator SpawnObjects()

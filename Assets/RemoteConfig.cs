@@ -3,6 +3,7 @@ using Unity.Services.RemoteConfig;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
 using UnityEngine;
+using System.Collections;
 
 public class RemoteConfigStart : MonoBehaviour
 {
@@ -46,15 +47,21 @@ public class RemoteConfigStart : MonoBehaviour
 
         RemoteConfigService.Instance.FetchCompleted += ApplyRemoteSettings;
         RemoteConfigService.Instance.FetchConfigs(new userAttributes(), new appAttributes());
+
+        StartCoroutine(UpdateRemoteData());
     }
 
-    public void Fetch()
+    IEnumerator UpdateRemoteData()
     {
-        if (Utilities.CheckForInternetConnection())
-            RemoteConfigService.Instance.FetchConfigs(new userAttributes(), new appAttributes());
+        while (true)
+        {
+         RemoteConfigService.Instance.FetchConfigs(new userAttributes(), new appAttributes());
+            yield return new WaitForSeconds(7);
+        }
+        
     }
 
-    void ApplyRemoteSettings(ConfigResponse configResponse)
+     void ApplyRemoteSettings(ConfigResponse configResponse)
     {
         Debug.Log("RemoteConfigService.Instance.appConfig fetched: " + RemoteConfigService.Instance.appConfig.config.ToString());
 
