@@ -10,6 +10,10 @@ public class ClientSpawn : MonoBehaviour
 
     private float _timer;
 
+    private void Start()
+    {
+        SpawnCliente();
+    }
     private void Update()
     {
         _timer += Time.deltaTime;

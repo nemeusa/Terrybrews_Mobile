@@ -14,6 +14,7 @@ public class Drink : MonoBehaviour
     public DrinkType drinkType;
     private bool _isOverClient = false;
     private GameObject _clienteActual = null;
+    [HideInInspector]
     public Client _client;
 
     private void Awake()
@@ -27,7 +28,7 @@ public class Drink : MonoBehaviour
     }
     public void ResetDrinkPosition()
     {
-        transform.position = _drinkPos.position;
+        //transform.position = _drinkPos.position;
         _rb.velocity = Vector2.zero;
     }
 
@@ -50,8 +51,10 @@ public class Drink : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         Client client = other.GetComponent<Client>();
+        _client = client;
         if (client != null)
         {
+           // Debug.Log("CLIENTE DETECTADO");
             _clienteActual = client.gameObject;
             _isOverClient = true;
         }

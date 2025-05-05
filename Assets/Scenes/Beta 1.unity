@@ -154,7 +154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clientePrefab: {fileID: 438254821381850653, guid: 39bbe0faedcfb9049bcef0c4d352d166, type: 3}
   puntoDeSpawn: {fileID: 2004460593}
-  tiempoEntreClientes: 2
+  tiempoEntreClientes: 10
 --- !u!4 &337143578
 Transform:
   m_ObjectHideFlags: 0

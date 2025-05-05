@@ -24,6 +24,7 @@ public class PlayerDrag : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoi
     private void Awake()
     {
         _objectRb = GetComponent<Rigidbody2D>();
+        _drink = GetComponent<Drink>();
     }
 
     private void Start()

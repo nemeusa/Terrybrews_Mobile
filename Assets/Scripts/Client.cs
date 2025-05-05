@@ -19,16 +19,18 @@ public class Client : MonoBehaviour
     [SerializeField] bool quieto;
     bool _goodOrder;
 
+    [HideInInspector]
     public DrinkType wishDrink;
 
+    [HideInInspector]
     public DrinkType bebidaEsperada;
 
     Vector2 dir;
     Vector3 dir3;
 
 
-    public Color nuevoColor = Color.red;
-    public Color buenoColor = Color.yellow;
+    public Color water = Color.red;
+    public Color coke = Color.yellow;
 
     private void Start()
     {
@@ -42,20 +44,22 @@ public class Client : MonoBehaviour
         _intoExit = Random.Range(0, 2) == 0 ? -1 : 1;
         _isEnter = true;
 
-        if (_intoExit == -1)
-        {
-            imposter = true;
-            GetComponent<Renderer>().material.color = nuevoColor;
-            // Debug.Log("Impostor");
-        }
-        else
-        {
-            imposter = false;
-            // Debug.Log("tipo bueno");
-            ColorXD();
-        }
+        //if (_intoExit == -1)
+        //{
+        //    imposter = true;
+        //    GetComponent<Renderer>().material.color = water;
+        //    // Debug.Log("Impostor");
+        //}
+        //else
+        //{
+        //    imposter = false;
+        //    // Debug.Log("tipo bueno");
+        //    ColorXD();
+        //}
         bebidaEsperada = ElegirBebidaAleatoria();
         Debug.Log("El cliente quiere: " + bebidaEsperada);
+
+       
     }
 
 
@@ -67,13 +71,24 @@ public class Client : MonoBehaviour
         {
             transform.position = Vector3.zero;
         }
+        Destroy(gameObject, 15);
     }
 
     private DrinkType ElegirBebidaAleatoria()
     {
         DrinkType[] tipos = (DrinkType[])System.Enum.GetValues(typeof(DrinkType));
+
         int indice = Random.Range(0, tipos.Length);
+        ColorDrink();
         return tipos[indice];
+    }
+
+    void ColorDrink()
+    { 
+        if(wishDrink == DrinkType.Coca) GetComponent<Renderer>().material.color = coke;
+
+        else GetComponent<Renderer>().material.color = water;
+    
     }
 
     public void ReceiveDrink(Drink bebida)
@@ -87,6 +102,11 @@ public class Client : MonoBehaviour
         {
             Debug.Log("Cliente enojado: quería " + bebidaEsperada);
         }
+
+        if (bebida.drinkType == DrinkType.Coca) GetComponent<Renderer>().material.color = coke;
+
+        else GetComponent<Renderer>().material.color = water;
+
     }
 
     void ClientMove()
@@ -118,30 +138,5 @@ public class Client : MonoBehaviour
             //Debug.Log(dir.magnitude);
             transform.position += dir3 * _exitSpeed * Time.deltaTime;
         }
-    }
-
-    //public void ReceiveDrink(Drink drink)
-    //{
-        //if (drink.drinkType == wishDrink)
-        //{
-      //      Debug.Log("Cliente recibió la bebida correcta: " + drink.drinkType);
-        //}
-        //else
-        //{
-        //    Debug.Log("¡Bebida incorrecta! Esperaba: " + wishDrink);
-      //  }
-    //}
-
-    void entrando()
-    {
-   //     Debug.Log("entrando");
-        //transform.forward = dir;
-        //transform.position += (dir * _speed * Time.deltaTime);
-    }
-
-
-    void ColorXD()
-    {
-        GetComponent<Renderer>().material.color = buenoColor;
     }
 }
