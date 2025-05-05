@@ -18,12 +18,8 @@ public class Client : MonoBehaviour
     public bool _isOrdering;
     [SerializeField] bool quieto;
     bool _goodOrder;
-
     [HideInInspector]
     public DrinkType wishDrink;
-
-    [HideInInspector]
-    public DrinkType bebidaEsperada;
 
     Vector2 dir;
     Vector3 dir3;
@@ -56,8 +52,8 @@ public class Client : MonoBehaviour
         //    // Debug.Log("tipo bueno");
         //    ColorXD();
         //}
-        bebidaEsperada = ElegirBebidaAleatoria();
-        Debug.Log("El cliente quiere: " + bebidaEsperada);
+        wishDrink = ElegirBebidaAleatoria();
+        Debug.Log("El cliente quiere: " + wishDrink);
 
        
     }
@@ -79,7 +75,6 @@ public class Client : MonoBehaviour
         DrinkType[] tipos = (DrinkType[])System.Enum.GetValues(typeof(DrinkType));
 
         int indice = Random.Range(0, tipos.Length);
-        ColorDrink();
         return tipos[indice];
     }
 
@@ -87,25 +82,21 @@ public class Client : MonoBehaviour
     { 
         if(wishDrink == DrinkType.Coca) GetComponent<Renderer>().material.color = coke;
 
-        else GetComponent<Renderer>().material.color = water;
+        else if(wishDrink == DrinkType.Water) GetComponent<Renderer>().material.color = water;
     
     }
 
     public void ReceiveDrink(Drink bebida)
     {
-        if (bebida.drinkType == bebidaEsperada)
+        if (bebida.drinkType == wishDrink)
         {
             Debug.Log("Cliente feliz: bebida correcta");
             _goodOrder = true;
         }
         else
         {
-            Debug.Log("Cliente enojado: quería " + bebidaEsperada);
+            Debug.Log("Cliente enojado: quería " + wishDrink);
         }
-
-        if (bebida.drinkType == DrinkType.Coca) GetComponent<Renderer>().material.color = coke;
-
-        else GetComponent<Renderer>().material.color = water;
 
     }
 
@@ -122,6 +113,7 @@ public class Client : MonoBehaviour
         if (Mathf.Abs(dir.x) < 0.1f && !_served)
         {
             _isEnter = false;
+            ColorDrink();
             //pedidoTexto.SetActive(true);
             _isOrdering = true;
            // Debug.Log("pidiendo");
