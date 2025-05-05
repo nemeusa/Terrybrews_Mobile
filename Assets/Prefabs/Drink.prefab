@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1660385960579109662}
   - component: {fileID: 7486370119722939364}
   - component: {fileID: 7403435043604732173}
+  - component: {fileID: 8867627356285013864}
   m_Layer: 9
   m_Name: Drink
   m_TagString: Untagged
@@ -48,8 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _lerpSpeed: 0.1
-  _drinkPos: {fileID: 0}
-  _client: {fileID: 0}
+  _drink: {fileID: 0}
 --- !u!50 &7486370119722939364
 Rigidbody2D:
   serializedVersion: 4
@@ -112,6 +112,21 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 2}
   m_Direction: 0
+--- !u!114 &8867627356285013864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 502251161530863763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0185f489c842f0449dfb7e8a2941fc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _drinkPos: {fileID: 0}
+  drinkType: 1
+  _client: {fileID: 0}
 --- !u!1 &8774966964947171229
 GameObject:
   m_ObjectHideFlags: 0

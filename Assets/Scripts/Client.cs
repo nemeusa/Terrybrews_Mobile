@@ -26,7 +26,10 @@ public class Client : MonoBehaviour
 
 
     public Color water = Color.red;
-    public Color coke = Color.yellow;
+    public Color coke = Color.yellow;   
+    
+    public Color _happy = Color.green;
+    public Color _sad = Color.red;
 
     private void Start()
     {
@@ -90,11 +93,14 @@ public class Client : MonoBehaviour
     {
         if (bebida.drinkType == wishDrink)
         {
-            Debug.Log("Cliente feliz: bebida correcta");
             _goodOrder = true;
+            GetComponent<Renderer>().material.color = _happy;
+            Debug.Log("Cliente feliz: bebida correcta");
         }
         else
         {
+            _goodOrder = true;
+            GetComponent<Renderer>().material.color = _sad;
             Debug.Log("Cliente enojado: quería " + wishDrink);
         }
 
@@ -110,18 +116,16 @@ public class Client : MonoBehaviour
             //Debug.Log(dir.magnitude);
             transform.position += dir3 * _speed * Time.deltaTime;
         }
-        if (Mathf.Abs(dir.x) < 0.1f && !_served)
+        if (Mathf.Abs(dir.x) < 0.1f && !_served && !_goodOrder)
         {
             _isEnter = false;
             ColorDrink();
-            //pedidoTexto.SetActive(true);
             _isOrdering = true;
            // Debug.Log("pidiendo");
             _orderTimer += 0.1f * Time.deltaTime;
         }
         if (_orderTimer >= _orderingTime && !_isEnter || _goodOrder)
         {
-            //pedidoTexto.SetActive(false);
            // Debug.Log("se va");
             _isOrdering = false;
             _served = true;
