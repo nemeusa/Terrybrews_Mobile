@@ -10,7 +10,6 @@ public class AddTime : MonoBehaviour
         if (timer != null)
         {
             timer.AddTime(timeToAdd);
-            Destroy(gameObject); // Opcional: se destruye el objeto recolectado
         }
     }
 }

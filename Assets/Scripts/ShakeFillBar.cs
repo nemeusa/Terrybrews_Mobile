@@ -9,8 +9,16 @@ public class ShakeFillBar : MonoBehaviour
     private float _currentFillAmount = 0;
     [SerializeField] private float _maxFillAmount = 1000f, _fillPerShake = 2.5f;
     public bool barFilled = false;
+    public float currentTime;
+    public GameTimer gameTimer;
+    float bonusTime=10;
 
     [SerializeField, Range(1.1f, 3f)] private float _shakeForce = 2f;
+
+    private void Start()
+    {
+        gameTimer = FindObjectOfType<GameTimer>();
+    }
 
     void Update()
     {
@@ -18,9 +26,19 @@ public class ShakeFillBar : MonoBehaviour
 
         if (_currentFillAmount == _maxFillAmount)
         {
+            GoodAction();
             barFilled = true;
             this.gameObject.SetActive(false);
             _currentFillAmount = 0;
+        }
+    }
+
+    void GoodAction()
+    {
+        if (gameTimer != null)
+        {
+            gameTimer.AddTime(bonusTime);
+            Debug.Log("Tiempo sumado: +" + bonusTime + "s");
         }
     }
 

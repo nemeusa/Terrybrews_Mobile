@@ -14,12 +14,12 @@ public class PlayerActionHandler : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Equals) || Input.GetKeyDown(KeyCode.KeypadPlus)) // "+" key (normal and numpad)
+        if (Input.GetKeyDown(KeyCode.Equals) || Input.GetKeyDown(KeyCode.KeypadPlus)) // "+" 
         {
             GoodAction();
         }
 
-        if (Input.GetKeyDown(KeyCode.Minus) || Input.GetKeyDown(KeyCode.KeypadMinus)) // "-" key (normal and numpad)
+        if (Input.GetKeyDown(KeyCode.Minus) || Input.GetKeyDown(KeyCode.KeypadMinus)) // "-" 
         {
             BadAction();
         }

@@ -234,6 +234,7 @@ MonoBehaviour:
   newColor: {r: 1, g: 0, b: 0, a: 1}
   broken: 0
   clickCounter: -1
+  ndGenerator: 0
 --- !u!61 &262729442
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1171,9 +1172,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 2093744593}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 1594, y: 159}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -326, y: 161}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &843448741
@@ -1196,9 +1197,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Llevar 2 bebidas
-
-    a la mezcladora'
+  m_text: "Llevar 2 bebidas a la mezcladora\n            Agitar con pasi\xF3n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1261,7 +1260,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -410.70947, w: 0}
+  m_margin: {x: -386.86838, y: 0, z: -174.28996, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1497,6 +1496,7 @@ MonoBehaviour:
   newColor: {r: 1, g: 0, b: 0, a: 1}
   broken: 0
   clickCounter: -1
+  ndGenerator: 0
 --- !u!212 &1017395642
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1965,14 +1965,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1264841947}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 82c25cd7d7136ac4e927780bc16d067b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   shakeThreshold: 2
-  moveAmount: 20
-  moveSpeed: 20
+  moveAmount: 0
+  moveSpeed: 0
 --- !u!114 &1264841950
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2644,10 +2644,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bar: {fileID: 1238801092}
-  _maxFillAmount: 1000
-  _fillPerShake: 2.5
+  _maxFillAmount: 100
+  _fillPerShake: 25
   barFilled: 0
-  _shakeForce: 2
+  currentTime: 0
+  gameTimer: {fileID: 546922603}
+  _shakeForce: 3
 --- !u!114 &1701444626
 MonoBehaviour:
   m_ObjectHideFlags: 0
