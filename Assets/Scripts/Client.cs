@@ -8,7 +8,7 @@ public class Client : MonoBehaviour
     [SerializeField] float _exitSpeed;
     [SerializeField] float _orderingTime;
     private float _orderTimer;
-    [SerializeField] Transform _servePoint;
+    Transform _servePoint;
     //[SerializeField] Transform _enterPoint;
     //[SerializeField] GameObject pedidoTexto;
     float _intoExit;
@@ -17,9 +17,11 @@ public class Client : MonoBehaviour
     bool _served;
     public bool _isOrdering;
     [SerializeField] bool quieto;
+    bool _goodOrder;
 
     public DrinkType wishDrink;
 
+    public DrinkType bebidaEsperada;
 
     Vector2 dir;
     Vector3 dir3;
@@ -30,6 +32,13 @@ public class Client : MonoBehaviour
 
     private void Start()
     {
+        _servePoint = GameObject.Find("Serve point").transform;
+
+        if (_servePoint == null)
+        {
+            Debug.LogError("Serve point no encontrado en " + name);
+        }
+
         _intoExit = Random.Range(0, 2) == 0 ? -1 : 1;
         _isEnter = true;
 
@@ -45,7 +54,11 @@ public class Client : MonoBehaviour
             // Debug.Log("tipo bueno");
             ColorXD();
         }
+        bebidaEsperada = ElegirBebidaAleatoria();
+        Debug.Log("El cliente quiere: " + bebidaEsperada);
     }
+
+
 
     void Update()
     {
@@ -56,12 +69,32 @@ public class Client : MonoBehaviour
         }
     }
 
+    private DrinkType ElegirBebidaAleatoria()
+    {
+        DrinkType[] tipos = (DrinkType[])System.Enum.GetValues(typeof(DrinkType));
+        int indice = Random.Range(0, tipos.Length);
+        return tipos[indice];
+    }
+
+    public void ReceiveDrink(Drink bebida)
+    {
+        if (bebida.drinkType == bebidaEsperada)
+        {
+            Debug.Log("Cliente feliz: bebida correcta");
+            _goodOrder = true;
+        }
+        else
+        {
+            Debug.Log("Cliente enojado: quería " + bebidaEsperada);
+        }
+    }
+
     void ClientMove()
     {
         if (_isEnter)
         {
-            Debug.Log("ENTRA");
-            dir = _servePoint.transform.position - transform.position;
+           // Debug.Log("ENTRA");
+            dir = (_servePoint.position - transform.position).normalized;
             dir3 = new Vector3(dir.x, dir3.y, 0);
             //Debug.Log(dir.magnitude);
             transform.position += dir3 * _speed * Time.deltaTime;
@@ -71,23 +104,15 @@ public class Client : MonoBehaviour
             _isEnter = false;
             //pedidoTexto.SetActive(true);
             _isOrdering = true;
-            Debug.Log("pidiendo");
+           // Debug.Log("pidiendo");
             _orderTimer += 0.1f * Time.deltaTime;
         }
-        if (_orderTimer >= _orderingTime && !_isEnter)
+        if (_orderTimer >= _orderingTime && !_isEnter || _goodOrder)
         {
             //pedidoTexto.SetActive(false);
-            Debug.Log("se va");
+           // Debug.Log("se va");
             _isOrdering = false;
             _served = true;
-            ////transform.forward = dirEnter;
-            ////transform.position += (dirEnter * _speed * Time.deltaTime);
-
-            ////transform.forward = -dir;
-            //transform.position = new Vector3(transform.position.x + _intoExit * (_exitSpeed * Time.deltaTime), transform.position.y, transform.position.z);
-            //Debug.Log(transform.position);
-            ////Destroy(gameObject, 10);
-            ///
             dir = _servePoint.transform.position + transform.position;
             dir3 = new Vector3(dir.x, dir3.y, 0);
             //Debug.Log(dir.magnitude);
@@ -95,21 +120,21 @@ public class Client : MonoBehaviour
         }
     }
 
-    public void ReceiveDrink(Drink drink)
-    {
-        if (drink.drinkType == wishDrink)
-        {
-            Debug.Log("Cliente recibió la bebida correcta: " + drink.drinkType);
-        }
-        else
-        {
-            Debug.Log("¡Bebida incorrecta! Esperaba: " + wishDrink);
-        }
-    }
+    //public void ReceiveDrink(Drink drink)
+    //{
+        //if (drink.drinkType == wishDrink)
+        //{
+      //      Debug.Log("Cliente recibió la bebida correcta: " + drink.drinkType);
+        //}
+        //else
+        //{
+        //    Debug.Log("¡Bebida incorrecta! Esperaba: " + wishDrink);
+      //  }
+    //}
 
     void entrando()
     {
-        Debug.Log("entrando");
+   //     Debug.Log("entrando");
         //transform.forward = dir;
         //transform.position += (dir * _speed * Time.deltaTime);
     }
