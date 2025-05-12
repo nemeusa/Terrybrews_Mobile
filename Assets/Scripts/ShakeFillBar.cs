@@ -13,11 +13,6 @@ public class ShakeFillBar : MonoBehaviour
 
     [SerializeField, Range(1.1f, 3f)] private float _shakeForce = 2f;
 
-    private void Start()
-    {
-        gameTimer = FindObjectOfType<GameTimer>();
-    }
-
     void Update()
     {
         ChargeImage();

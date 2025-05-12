@@ -19,6 +19,7 @@ public class Generator : MonoBehaviour, IPointerClickHandler
 
     public Color originalColor = Color.white;
     public Color newColor = Color.red;
+    public Color actualColor;
 
     public bool broken = false;
     public int clickCounter = 0;
@@ -73,30 +74,28 @@ public class Generator : MonoBehaviour, IPointerClickHandler
     {
         if (broken)
         {
-            //GetComponent<Renderer>().material.color = originalColor;
-            //clickCounter++;
-
-            //GetComponent<Renderer>().material.color = newColor;
-
-            StartCoroutine(clickRepare());
-           
-
             if (clickCounter >= clicsParaReparar)
             {
+                actualColor = originalColor;
                 broken = false;
                 Debug.Log("¡Generador reparado!");
-                GetComponent<Renderer>().material.color = originalColor;
+            }
+
+            else
+            {
+                actualColor = newColor;
             }
         }
+                StartCoroutine(clickRepare());
     }
 
     IEnumerator clickRepare()
     {
-        GetComponent<Renderer>().material.color = originalColor;
+        GetComponent<Renderer>().material.color = Color.green;
         clickCounter++;
 
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.1f);
 
-        GetComponent<Renderer>().material.color = newColor;
+        GetComponent<Renderer>().material.color = actualColor;
     }
 }
