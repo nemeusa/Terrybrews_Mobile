@@ -232,6 +232,7 @@ MonoBehaviour:
   clicsParaReparar: 10
   originalColor: {r: 1, g: 1, b: 1, a: 1}
   newColor: {r: 1, g: 0, b: 0, a: 1}
+  actualColor: {r: 0, g: 0, b: 0, a: 0}
   broken: 0
   clickCounter: -1
   ndGenerator: 0
@@ -401,7 +402,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 69.04, y: 21.709845}
+    oldSize: {x: 69.09608, y: 21.66}
     newSize: {x: 69.04, y: 21.709845}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -1494,6 +1495,7 @@ MonoBehaviour:
   clicsParaReparar: 10
   originalColor: {r: 1, g: 1, b: 1, a: 1}
   newColor: {r: 1, g: 0, b: 0, a: 1}
+  actualColor: {r: 0, g: 0, b: 0, a: 0}
   broken: 0
   clickCounter: -1
   ndGenerator: 0
@@ -1965,14 +1967,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1264841947}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 82c25cd7d7136ac4e927780bc16d067b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shakeThreshold: 2
-  moveAmount: 0
-  moveSpeed: 0
+  shakeThreshold: 2.5
+  moveAmount: 0.5
+  moveSpeed: 10
 --- !u!114 &1264841950
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2645,11 +2647,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bar: {fileID: 1238801092}
   _maxFillAmount: 100
-  _fillPerShake: 25
+  _fillPerShake: 2.5
   barFilled: 0
   currentTime: 0
   gameTimer: {fileID: 546922603}
-  _shakeForce: 3
+  _shakeForce: 2.5
 --- !u!114 &1701444626
 MonoBehaviour:
   m_ObjectHideFlags: 0

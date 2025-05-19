@@ -13,7 +13,7 @@ public class InstantiateDrink : MonoBehaviour
         if(_shakeFillBar.barFilled)
         {
             Debug.Log("Driiiinkkkk");
-            Instantiate(_drinkPref, _spawnPoint);
+            //Instantiate(_drinkPref, _spawnPoint);
             _shakeFillBar.barFilled = false;
         }
     }
