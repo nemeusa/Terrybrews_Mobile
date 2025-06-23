@@ -21,6 +21,11 @@ public class Generator : MonoBehaviour, IPointerClickHandler
     public Color newColor = Color.red;
     public Color actualColor;
 
+    [Header("Sprites")]
+    public Sprite funciona;
+    public Sprite roto;
+    private SpriteRenderer spriteRenderer;
+
     public bool broken = false;
     public int clickCounter = 0;
 
@@ -29,13 +34,18 @@ public class Generator : MonoBehaviour, IPointerClickHandler
 
     [Header("Unity Cloud")]
     public bool ndGenerator = false;
+
+
     private void Start()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = funciona;
         StartCoroutine(SpawnObjects());
         if (!(ndGenerator = false))
         {
             gameObject.SetActive(true);
         }
+
     }
 
     private IEnumerator SpawnObjects()
@@ -55,7 +65,8 @@ public class Generator : MonoBehaviour, IPointerClickHandler
                    
                     clickCounter = 0;
                     Debug.Log("¡El generador se rompió!");
-                    GetComponent<Renderer>().material.color = newColor; 
+                    GetComponent<Renderer>().material.color = newColor;
+                    spriteRenderer.sprite = roto;
                     broken = true;
                 }
             }
@@ -77,6 +88,7 @@ public class Generator : MonoBehaviour, IPointerClickHandler
             if (clickCounter >= clicsParaReparar)
             {
                 actualColor = originalColor;
+                spriteRenderer.sprite = funciona;
                 broken = false;
                 Debug.Log("¡Generador reparado!");
             }

@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class Client : MonoBehaviour
 {
+    [Header("Sprites")]
+    [SerializeField] List<Sprite> listaSprites;
+    private SpriteRenderer spriteRenderer;
+    private static List<Sprite> spritesEnUso = new List<Sprite>();
+    private Sprite spriteElegido;
+
+
+    [Header("Comportamiento")]
     [SerializeField] float _speed;
     [SerializeField] float _exitSpeed;
     [SerializeField] float _orderingTime;
@@ -19,6 +27,9 @@ public class Client : MonoBehaviour
     [SerializeField] bool quieto;
     bool _goodOrder;
     [HideInInspector]
+
+
+    [Header("Drink")]
     public DrinkType wishDrink;
 
     Vector2 dir;
@@ -32,7 +43,32 @@ public class Client : MonoBehaviour
     public Color _sad = Color.red;
 
     private void Start()
-    {
+    { 
+        spriteRenderer = GetComponent<SpriteRenderer>();   
+        
+        if (listaSprites != null && listaSprites.Count > 0)
+        {
+            List<Sprite> disponibles = new List<Sprite>(listaSprites);
+            disponibles.RemoveAll(sprite => spritesEnUso.Contains(sprite));
+
+            if (disponibles.Count > 0)
+            {
+                spriteElegido = disponibles[Random.Range(0, disponibles.Count)];
+                spriteRenderer.sprite = spriteElegido;
+                spritesEnUso.Add(spriteElegido);
+            }
+            else
+            {
+                Debug.LogWarning("No hay sprites disponibles para el nuevo cliente. Se destruirá.");
+                Destroy(gameObject);
+                return;
+            }
+        }
+        else
+        {
+            Debug.LogWarning("No hay sprites definidos para el cliente.");
+        }
+
         _servePoint = GameObject.Find("Serve point").transform;
 
         if (_servePoint == null)
@@ -55,13 +91,13 @@ public class Client : MonoBehaviour
         //    // Debug.Log("tipo bueno");
         //    ColorXD();
         //}
-        wishDrink = ElegirBebidaAleatoria();
+        wishDrink = RandomBeverage();
         Debug.Log("El cliente quiere: " + wishDrink);
 
-       
+     
+
+
     }
-
-
 
     void Update()
     {
@@ -73,7 +109,7 @@ public class Client : MonoBehaviour
         Destroy(gameObject, 15);
     }
 
-    private DrinkType ElegirBebidaAleatoria()
+    private DrinkType RandomBeverage()
     {
         DrinkType[] tipos = (DrinkType[])System.Enum.GetValues(typeof(DrinkType));
 
@@ -95,25 +131,55 @@ public class Client : MonoBehaviour
         {
             _goodOrder = true;
             GetComponent<Renderer>().material.color = _happy;
-            Debug.Log("Cliente feliz: bebida correcta");
+            int puntosSuma = bebida.drinkType == DrinkType.Coca ? 100 : 50;
+            AddPoints(puntosSuma);
+
+            Debug.Log("Cliente feliz: bebida correcta. +" + puntosSuma + " puntos");
         }
         else
         {
             _goodOrder = true;
             GetComponent<Renderer>().material.color = _sad;
-            Debug.Log("Cliente enojado: quería " + wishDrink);
+
+            RestarPuntos(50);
+            RestarTiempo(5f); // restar 5 segundos
+
+            Debug.Log("Cliente enojado: quería " + wishDrink + ". -50 puntos y -5 seg");
         }
 
     }
 
+    void AddPoints(int cantidad)
+    {
+        int puntos = PlayerPrefs.GetInt("Points", 0);
+        puntos += cantidad;
+        PlayerPrefs.SetInt("Points", puntos);
+        PlayerPrefs.Save(); 
+
+    }
+
+    void RestarPuntos(int cantidad)
+    {
+        int puntos = PlayerPrefs.GetInt("Points", 0);
+        puntos = Mathf.Max(0, puntos - cantidad);
+        PlayerPrefs.SetInt("Points", puntos);
+        PlayerPrefs.Save();
+    }
+
+    void RestarTiempo(float segundos)
+    {
+        GameTimer timer = FindObjectOfType<GameTimer>();
+        if (timer != null)
+        {
+            timer.RestarTiempo(segundos);
+        }
+    }
     void ClientMove()
     {
         if (_isEnter)
         {
-           // Debug.Log("ENTRA");
             dir = (_servePoint.position - transform.position).normalized;
             dir3 = new Vector3(dir.x, dir3.y, 0);
-            //Debug.Log(dir.magnitude);
             transform.position += dir3 * _speed * Time.deltaTime;
         }
         if (Mathf.Abs(dir.x) < 0.1f && !_served && !_goodOrder)
@@ -121,18 +187,22 @@ public class Client : MonoBehaviour
             _isEnter = false;
             ColorDrink();
             _isOrdering = true;
-           // Debug.Log("pidiendo");
             _orderTimer += 0.1f * Time.deltaTime;
         }
         if (_orderTimer >= _orderingTime && !_isEnter || _goodOrder)
         {
-           // Debug.Log("se va");
             _isOrdering = false;
             _served = true;
             dir = _servePoint.transform.position + transform.position;
             dir3 = new Vector3(dir.x, dir3.y, 0);
-            //Debug.Log(dir.magnitude);
             transform.position += dir3 * _exitSpeed * Time.deltaTime;
+        }
+    }
+    private void OnDestroy()
+    {
+        if (spriteElegido != null && spritesEnUso.Contains(spriteElegido))
+        {
+            spritesEnUso.Remove(spriteElegido);
         }
     }
 }

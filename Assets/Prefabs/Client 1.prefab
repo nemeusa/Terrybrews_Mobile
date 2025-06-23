@@ -98,6 +98,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c080bed3ebc97146bb198248ef6fb74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  listaSprites:
+  - {fileID: 21300000, guid: eafcd78fcda2129498e6aec7b115b312, type: 3}
+  - {fileID: 21300000, guid: 23e642b9150eef045b0d279e13a93313, type: 3}
+  - {fileID: 21300000, guid: 888d642d30902fb4888fbd78edc401c8, type: 3}
+  - {fileID: 21300000, guid: da6a43c1fb7f3e44da99a79f38f44e65, type: 3}
+  - {fileID: 21300000, guid: 49ea3ee03d534df45b8744e0e1d4652f, type: 3}
+  - {fileID: 21300000, guid: f1ae972eec74bc54185dcc41cac5a216, type: 3}
+  - {fileID: 21300000, guid: 81f5942eb4e337a4492ae97e1d5050ff, type: 3}
+  - {fileID: 21300000, guid: db0770b62476c4c4bba14bbca2448764, type: 3}
+  - {fileID: 21300000, guid: dbc8f2904c7685046862aee5a1855b0e, type: 3}
+  - {fileID: 21300000, guid: a5ad10fea3b8c364a8962f5734864b0b, type: 3}
   _speed: 3
   _exitSpeed: 6
   _orderingTime: 0.5
@@ -105,9 +116,10 @@ MonoBehaviour:
   _isOrdering: 0
   quieto: 0
   wishDrink: 0
-  bebidaEsperada: 0
   water: {r: 0, g: 0.8164692, b: 1, a: 1}
   coke: {r: 1, g: 0, b: 0.7461648, a: 1}
+  _happy: {r: 0, g: 1, b: 0, a: 1}
+  _sad: {r: 1, g: 0, b: 0, a: 1}
 --- !u!61 &8776221871399151115
 BoxCollider2D:
   m_ObjectHideFlags: 0

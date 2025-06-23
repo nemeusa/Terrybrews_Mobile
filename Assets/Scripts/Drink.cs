@@ -11,7 +11,7 @@ public class Drink : MonoBehaviour
     [SerializeField] Transform _drinkPos;
 
 
-    [Header("deliver drink")]
+    [Header("Deliver drink")]
     public DrinkType drinkType;
     private bool _isOverClient = false;
     private GameObject _clienteActual = null;

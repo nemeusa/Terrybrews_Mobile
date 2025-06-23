@@ -98,17 +98,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c080bed3ebc97146bb198248ef6fb74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  listaSprites:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   _speed: 3
   _exitSpeed: 6
   _orderingTime: 0.5
-  _servePoint: {fileID: 0}
   imposter: 0
   _isOrdering: 0
   quieto: 0
   wishDrink: 0
-  bebidaEsperada: 0
-  nuevoColor: {r: 1, g: 0, b: 0, a: 1}
-  buenoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  water: {r: 1, g: 0, b: 0, a: 1}
+  coke: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  _happy: {r: 0, g: 1, b: 0, a: 1}
+  _sad: {r: 1, g: 0, b: 0, a: 1}
 --- !u!61 &676401553066128250
 BoxCollider2D:
   m_ObjectHideFlags: 0

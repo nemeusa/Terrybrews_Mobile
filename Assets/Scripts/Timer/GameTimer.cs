@@ -5,15 +5,32 @@ using TMPro;
 
 public class GameTimer : MonoBehaviour
 {
-    public float totalTime = 60f; // Tiempo inicial en segundos
-    public TextMeshProUGUI timerText;        // Asigna en el Inspector un Text UI
-    public string nextSceneName;  // Nombre de la escena a cargar
-
+    [Header("Tiempo")]
+    public float totalTime = 60f;
+    public TextMeshProUGUI timerText;       
     private float currentTime;
+
+    [Header("UI Menú de Derrota")]
+    [SerializeField] private GameObject derrotaPanel;
+    [SerializeField] private Button btnReintentar;
+    [SerializeField] private Button btnMenu;
+    [SerializeField] private Button btnTienda;
+
+    [SerializeField] private string menuSceneName = "Menu";
+    [SerializeField] private string tiendaSceneName = "Shop";
 
     void Start()
     {
         currentTime = totalTime;
+
+        if (btnReintentar != null)
+            btnReintentar.onClick.AddListener(Retry);
+
+        if (btnMenu != null)
+            btnMenu.onClick.AddListener(() => LoadScene(menuSceneName));
+
+        if (btnTienda != null)
+            btnTienda.onClick.AddListener(() => LoadScene(tiendaSceneName));
     }
 
     void Update()
@@ -41,15 +58,29 @@ public class GameTimer : MonoBehaviour
         currentTime -= seconds;
     }
 
+    public void RestarTiempo(float cantidad)
+    {
+        currentTime -= cantidad;
+        if (currentTime < 0) currentTime = 0;
+    }
+    void Retry()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    void LoadScene(string nombreEscena)
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(nombreEscena);
+    }
+
     private void LoadNextScene()
     {
-        if (!string.IsNullOrEmpty(nextSceneName))
+        if (derrotaPanel != null)
         {
-            SceneManager.LoadScene(nextSceneName);
-        }
-        else
-        {
-            Debug.LogWarning("No se ha asignado el nombre de la próxima escena.");
+            Time.timeScale = 0f; // Pausar el juego
+            derrotaPanel.SetActive(true);
         }
     }
 }
