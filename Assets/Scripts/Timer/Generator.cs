@@ -41,13 +41,51 @@ public class Generator : MonoBehaviour, IPointerClickHandler
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = funciona;
         StartCoroutine(SpawnObjects());
+        Upgrades();
+
         if (!(ndGenerator = false))
         {
             gameObject.SetActive(true);
         }
 
     }
+    void Upgrades()
+    {
+        // Nivel de mejoras
+        int levelBreak = PlayerPrefs.GetInt("Upgrade_BreakChanceLevel", 0);
+        int levelMaxObjects = PlayerPrefs.GetInt("Upgrade_MaxObjectsLevel", 0);
+        int levelGenTime = PlayerPrefs.GetInt("Upgrade_GenTimeLevel", 0);
+        int levelRepair = PlayerPrefs.GetInt("Upgrade_RepairClickLevel", 0);
 
+        // Aplicar reducción de chance de rotura
+        breakChance = Mathf.Max(0.05f, breakChance - (levelBreak * 0.05f));
+        // Aumentar límite de objetos (de 3 hasta 10)
+        maxObjectsInScene = Mathf.Clamp(3 + levelMaxObjects, 3, 10);
+
+        // Reducir tiempo de generación (de 10 a 5)
+        tiempoMin = Mathf.Clamp(10 - levelGenTime, 5, 10);
+        tiempoMax = Mathf.Clamp(10 - levelGenTime, 5, 10);
+
+        // Reducir clics requeridos para reparar
+        clicsParaReparar = Mathf.Clamp(10 - levelRepair, 2, 10);
+    }
+    public void ActivarBurst()
+    {
+        if (broken) return;
+
+        for (int i = 0; i < 10; i++)
+        {
+            GameObject prefab = (Random.value < 0.5f) ? spawnedObject : spawnedObject2;
+            GameObject nuevoObjeto = Instantiate(prefab, spawnPoint.position, Quaternion.identity);
+            objetosGenerados.Add(nuevoObjeto);
+        }
+
+        broken = true;
+        clickCounter = 0;
+        spriteRenderer.sprite = roto;
+        GetComponent<Renderer>().material.color = newColor;
+        Debug.Log("¡Burst activado! Generador roto.");
+    }
     private IEnumerator SpawnObjects()
     {
         while (true)
