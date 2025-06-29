@@ -63,8 +63,8 @@ public class Generator : MonoBehaviour, IPointerClickHandler
         maxObjectsInScene = Mathf.Clamp(3 + levelMaxObjects, 3, 10);
 
         // Reducir tiempo de generación (de 10 a 5)
-        tiempoMin = Mathf.Clamp(10 - levelGenTime, 5, 10);
-        tiempoMax = Mathf.Clamp(10 - levelGenTime, 5, 10);
+        tiempoMin = Mathf.Clamp(10 - levelGenTime, 2,3);
+        tiempoMax = Mathf.Clamp(10 - levelGenTime, 2, 10);
 
         // Reducir clics requeridos para reparar
         clicsParaReparar = Mathf.Clamp(10 - levelRepair, 2, 10);

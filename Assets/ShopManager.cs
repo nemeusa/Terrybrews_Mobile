@@ -16,7 +16,7 @@ public class ShopManager : MonoBehaviour
         {
         "BreakChance", "MaxObjects", "GenTime", "RepairClick"
         };
-    [SerializeField] private int[] nivelesMaximos = { 5, 7, 5, 8 };
+    [SerializeField] private int[] nivelesMaximos = { 5, 7, 8, 8 };
     [SerializeField] private Button[] botonesComprar;
 
     [Header("Donación")]
@@ -24,8 +24,8 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI textoDonacion;
     [SerializeField] private Slider progresoDonacion;
 
-    private const int MONEDAS_POR_DONACION = 100;
-    private const int META_DONACION = 10000;
+    public int MONEDAS_POR_DONACION = 100;
+    public int META_DONACION = 1000;
 
     [Header("Escenas")]
     [SerializeField] string escenaJuego = "Juego";
@@ -42,6 +42,14 @@ public class ShopManager : MonoBehaviour
         string _clave = clavesMejora[index];
         int _monedas = PlayerPrefs.GetInt("Coins", 0);
         int _nivel = PlayerPrefs.GetInt("Upgrade_" + _clave + "Level", 0);
+
+        // Validación para evitar gastar monedas si ya está en nivel máximo
+        if (_nivel >= nivelesMaximos[index])
+        {
+            Debug.Log("Ya alcanzaste el nivel máximo de " + _clave);
+            return;
+        }
+
         int _costo = CalcularCosto(_nivel);
 
         if (_monedas >= _costo)
