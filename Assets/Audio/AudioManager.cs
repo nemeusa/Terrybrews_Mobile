@@ -12,7 +12,7 @@ public class AudioManager : MonoBehaviour
 
     [Header("<color=orange>Audio</color>")]
     [SerializeField] private AudioMixer _mixer;
-    public AudioSource SFXAudioSource;
+    public AudioSource GrabAudioSource;
     [SerializeField] private AudioClip[] _sfxClips;
 
     private AudioSource _source;
@@ -75,13 +75,13 @@ public class AudioManager : MonoBehaviour
         switch (clip)
         {
             case 0:
-                SFXAudioSource.clip = _sfxClips[0];
-                SFXAudioSource.Play();
+                GrabAudioSource.clip = _sfxClips[0];
+                GrabAudioSource.Play();
                 Debug.Log("Reproduciendo SFX clip 0: " + _sfxClips[0].name);
                 break;
             case 1:
-                SFXAudioSource.clip = _sfxClips[1];
-                SFXAudioSource.Play();
+                GrabAudioSource.clip = _sfxClips[1];
+                GrabAudioSource.Play();
                 Debug.Log("Reproduciendo SFX clip 1: " + _sfxClips[1].name);
                 break;
             default:
