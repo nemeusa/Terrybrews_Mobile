@@ -12,6 +12,8 @@ public class AudioManager : MonoBehaviour
 
     [Header("<color=orange>Audio</color>")]
     [SerializeField] private AudioMixer _mixer;
+    public AudioSource SFXAudioSource;
+    [SerializeField] private AudioClip[] _sfxClips;
 
     private AudioSource _source;
 
@@ -66,5 +68,25 @@ public class AudioManager : MonoBehaviour
         _source.clip = clip;
 
         _source.Play();
+    }
+
+    public void PlaySFXClip(int clip)
+    {
+        switch (clip)
+        {
+            case 0:
+                SFXAudioSource.clip = _sfxClips[0];
+                SFXAudioSource.Play();
+                Debug.Log("Reproduciendo SFX clip 0: " + _sfxClips[0].name);
+                break;
+            case 1:
+                SFXAudioSource.clip = _sfxClips[1];
+                SFXAudioSource.Play();
+                Debug.Log("Reproduciendo SFX clip 1: " + _sfxClips[1].name);
+                break;
+            default:
+                Debug.LogWarning("índice de clip inválido: " + clip);
+                break;
+        }
     }
 }

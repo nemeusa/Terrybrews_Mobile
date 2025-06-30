@@ -54,6 +54,8 @@ public class PlayerDrag : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoi
         _isDragging = true;
         //_objectRb.gravityScale = 0;
         //_objectRb.isKinematic = true;
+
+        AudioManager.Instance.PlaySFXClip(0);
         Debug.Log("Click");
     }
 
