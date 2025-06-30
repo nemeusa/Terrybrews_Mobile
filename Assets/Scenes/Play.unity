@@ -5417,6 +5417,22 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 6185455996406137654, guid: 4aa508bd0a520a2449483cc512aed909, type: 3}
+      propertyPath: actualColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6185455996406137654, guid: 4aa508bd0a520a2449483cc512aed909, type: 3}
+      propertyPath: actualColor.b
+      value: 0.9858491
+      objectReference: {fileID: 0}
+    - target: {fileID: 6185455996406137654, guid: 4aa508bd0a520a2449483cc512aed909, type: 3}
+      propertyPath: actualColor.g
+      value: 0.9858491
+      objectReference: {fileID: 0}
+    - target: {fileID: 6185455996406137654, guid: 4aa508bd0a520a2449483cc512aed909, type: 3}
+      propertyPath: actualColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6185455996406137654, guid: 4aa508bd0a520a2449483cc512aed909, type: 3}
       propertyPath: pruebaRepararGenerador
       value: 
       objectReference: {fileID: 0}
