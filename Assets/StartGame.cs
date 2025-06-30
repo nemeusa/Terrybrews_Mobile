@@ -1,11 +1,11 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneChanger : MonoBehaviour
+public class SceneChange : MonoBehaviour
 { 
     public string nombreEscena = "Juego";
     
-    public void Play()
+    public void Shop()
     {
       LifeSystem vidaSistema = FindObjectOfType<LifeSystem>();
 
