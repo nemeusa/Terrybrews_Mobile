@@ -194,4 +194,12 @@ public class ShopManager : MonoBehaviour
         ActualizarUI();
         Debug.Log("Todas las mejoras han sido reiniciadas.");
     }
+
+    public void DoblarPuntos()
+    {
+        int puntos = PlayerPrefs.GetInt("Points", 0);
+        puntos *= 2;
+        PlayerPrefs.SetInt("Points", puntos);
+        PlayerPrefs.Save();
+    }
 }

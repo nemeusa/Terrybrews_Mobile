@@ -105,7 +105,7 @@ public class Generator : MonoBehaviour, IPointerClickHandler
                     Debug.Log("¡El generador se rompió!");
                     GetComponent<Renderer>().material.color = newColor;
                     spriteRenderer.sprite = roto;
-                    AudioManager.Instance.PlaySFXClip(1);
+                    AudioManager.Instance.PlaySFXClip(0);
                     broken = true;
                 }
             }
@@ -129,6 +129,7 @@ public class Generator : MonoBehaviour, IPointerClickHandler
                 actualColor = originalColor;
                 spriteRenderer.sprite = funciona;
                 broken = false;
+                AudioManager.Instance.PlaySFXClip(1);
                 Debug.Log("¡Generador reparado!");
             }
 
