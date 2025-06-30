@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2757547116096943743}
   - component: {fileID: 908924433992670149}
   - component: {fileID: -6712144628281249387}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: coca
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -31,10 +31,14 @@ public class GameTimer : MonoBehaviour
 
         if (btnTienda != null)
             btnTienda.onClick.AddListener(() => LoadScene(tiendaSceneName));
+
+        Time.timeScale = 1f; // Asegurarse de que el tiempo está corriendo al inicio
     }
 
     void Update()
     {
+        Debug.Log(Time.timeScale);
+
         currentTime -= Time.deltaTime;
         currentTime = Mathf.Max(currentTime, 0f);
 
@@ -66,11 +70,13 @@ public class GameTimer : MonoBehaviour
     void Retry()
     {
         Time.timeScale = 1f;
+        Debug.Log("retry");
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     void LoadScene(string nombreEscena)
     {
+        Debug.Log("cargando escena");
         Time.timeScale = 1f;
         SceneManager.LoadScene(nombreEscena);
     }
@@ -80,7 +86,9 @@ public class GameTimer : MonoBehaviour
         if (derrotaPanel != null)
         {
             Time.timeScale = 0f; // Pausar el juego
+            Debug.Log("cargando siguiente escena");
             derrotaPanel.SetActive(true);
         }
+        //else Time.timeScale = 1f;
     }
 }
