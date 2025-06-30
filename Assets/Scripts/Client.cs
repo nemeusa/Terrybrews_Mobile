@@ -16,7 +16,8 @@ public class Client : MonoBehaviour
     [SerializeField] float _exitSpeed;
     [SerializeField] float _orderingTime;
     private float _orderTimer;
-    Transform _servePoint;
+    [HideInInspector]  
+    public Transform _servePoint;
     //[SerializeField] Transform _enterPoint;
     //[SerializeField] GameObject pedidoTexto;
     float _intoExit;
@@ -26,7 +27,9 @@ public class Client : MonoBehaviour
     public bool _isOrdering;
     [SerializeField] bool quieto;
     bool _goodOrder;
+
     [HideInInspector]
+    public GameTimer timer;
 
 
     [Header("Drink")]
@@ -69,7 +72,7 @@ public class Client : MonoBehaviour
             Debug.LogWarning("No hay sprites definidos para el cliente.");
         }
 
-        _servePoint = GameObject.Find("Serve point").transform;
+        //_servePoint = GameObject.Find("Serve point").transform;
 
         if (_servePoint == null)
         {
@@ -168,7 +171,7 @@ public class Client : MonoBehaviour
 
     void RestarTiempo(float segundos)
     {
-        GameTimer timer = FindObjectOfType<GameTimer>();
+       
         if (timer != null)
         {
             timer.RestarTiempo(segundos);

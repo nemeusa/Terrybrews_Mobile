@@ -140,7 +140,7 @@ MonoBehaviour:
   clicsParaReparar: 10
   originalColor: {r: 1, g: 1, b: 1, a: 1}
   newColor: {r: 1, g: 0, b: 0, a: 1}
-  actualColor: {r: 0, g: 0, b: 0, a: 0}
+  actualColor: {r: 1, g: 1, b: 1, a: 1}
   funciona: {fileID: 21300000, guid: 17ab2f49f0c9eac47bcab061e7675561, type: 3}
   roto: {fileID: 21300000, guid: 5df048b8888f4e546b3a101ed1b6ed35, type: 3}
   broken: 0

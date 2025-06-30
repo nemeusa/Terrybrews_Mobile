@@ -3,9 +3,10 @@ using UnityEngine;
 
 public class DEBUGSumarVidas : MonoBehaviour
 {
+    [SerializeField] LifeSystem lifeSystem;
     public void SumarUnaVida()
     {
-        LifeSystem lifeSystem = FindObjectOfType<LifeSystem>();
+        
         if (lifeSystem == null)
         {
             Debug.LogWarning("No se encontró el sistema de vidas.");

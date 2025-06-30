@@ -5,12 +5,7 @@ public class PlayerActionHandler : MonoBehaviour
     public float bonusTime = 5f;
     public float penaltyTime = 3f;
 
-    private GameTimer gameTimer;
-
-    void Start()
-    {
-        gameTimer = FindObjectOfType<GameTimer>();
-    }
+    [SerializeField] private GameTimer gameTimer;
 
     void Update()
     {

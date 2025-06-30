@@ -19,6 +19,8 @@ public class GameTimer : MonoBehaviour
     [SerializeField] private string menuSceneName = "Menu";
     [SerializeField] private string tiendaSceneName = "Shop";
 
+    [SerializeField] GameObject _pauseMenuUI;
+
     void Start()
     {
         currentTime = totalTime;
@@ -48,8 +50,11 @@ public class GameTimer : MonoBehaviour
 
         if (currentTime <= 0f)
         {
+            _pauseMenuUI.SetActive(false);
             LoadNextScene();
         }
+
+
     }
 
     public void AddTime(float seconds)
@@ -90,5 +95,10 @@ public class GameTimer : MonoBehaviour
             derrotaPanel.SetActive(true);
         }
         //else Time.timeScale = 1f;
+    }
+
+    public void finish()
+    {
+        currentTime = 0;
     }
 }
