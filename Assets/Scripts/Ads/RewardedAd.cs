@@ -6,19 +6,18 @@ using UnityEngine.Advertisements;
 public class RewardedAd : MonoBehaviour, IUnityAdsShowListener, IUnityAdsLoadListener
 {
     [SerializeField] string _androidAdUnitId = "Rewarded_Android";
-    [SerializeField] string _IOSAdUnitId = "Rewarded_iOS";
-    string _currentAdUnitId;
+    //[SerializeField] string _IOSAdUnitId = "Rewarded_iOS";
 
     [SerializeField] ShopManager _shopManager;
 
     public void LoadRewardedAd()
     {
-        Advertisement.Load(_currentAdUnitId, this); 
+        Advertisement.Load(_androidAdUnitId, this); 
     }
 
     public void ShowRewardedAd()
     {
-        Advertisement.Show(_currentAdUnitId, this);
+        Advertisement.Show(_androidAdUnitId, this);
         LoadRewardedAd();
     }
 
@@ -39,7 +38,7 @@ public class RewardedAd : MonoBehaviour, IUnityAdsShowListener, IUnityAdsLoadLis
 
     public void OnUnityAdsShowComplete(string placementId, UnityAdsShowCompletionState showCompletionState)
     {
-        if(placementId == _currentAdUnitId)
+        if(placementId == _androidAdUnitId)
         {
             if(showCompletionState.Equals(UnityAdsShowCompletionState.COMPLETED)) Debug.Log($"Anuncio completado");
             else if(showCompletionState.Equals(UnityAdsShowCompletionState.SKIPPED)) Debug.Log($"Anuncio saltado");

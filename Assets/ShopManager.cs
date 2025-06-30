@@ -184,13 +184,14 @@ public class ShopManager : MonoBehaviour
         ActualizarUI();
     }
 
-    void ReiniciarMejoras()
+    public void ReiniciarMejoras()
     {
         PlayerPrefs.DeleteKey("Upgrade_BreakChanceLevel");
         PlayerPrefs.DeleteKey("Upgrade_MaxObjectsLevel");
         PlayerPrefs.DeleteKey("Upgrade_GenTimeLevel");
         PlayerPrefs.DeleteKey("Upgrade_RepairClickLevel");
         PlayerPrefs.DeleteKey("BurstDesbloqueado");
+        objetoDesbloqueable.gameObject.SetActive(false);
         ActualizarUI();
         Debug.Log("Todas las mejoras han sido reiniciadas.");
     }
