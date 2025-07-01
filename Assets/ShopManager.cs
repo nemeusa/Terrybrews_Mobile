@@ -196,10 +196,10 @@ public class ShopManager : MonoBehaviour
         Debug.Log("Todas las mejoras han sido reiniciadas.");
     }
 
-    public void DoblarPuntos()
+    public void TriplicarPuntos()
     {
         int puntos = PlayerPrefs.GetInt("Points", 0);
-        puntos *= 2;
+        puntos *= 3;
         PlayerPrefs.SetInt("Points", puntos);
         PlayerPrefs.Save();
     }

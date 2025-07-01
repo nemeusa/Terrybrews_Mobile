@@ -6,7 +6,6 @@ using UnityEngine.Advertisements;
 public class RewardedAd : MonoBehaviour, IUnityAdsShowListener, IUnityAdsLoadListener
 {
     [SerializeField] string _androidAdUnitId = "Rewarded_Android";
-    //[SerializeField] string _IOSAdUnitId = "Rewarded_iOS";
 
     [SerializeField] ShopManager _shopManager;
 
@@ -19,6 +18,14 @@ public class RewardedAd : MonoBehaviour, IUnityAdsShowListener, IUnityAdsLoadLis
     {
         Advertisement.Show(_androidAdUnitId, this);
         LoadRewardedAd();
+    }
+
+    private void Start()
+    {
+        if(_shopManager == null)
+        {
+            Debug.LogWarning("ShopManager no asignado. Si estamos fuera del Shop, no darle importancia a este mensaje");
+        }
     }
 
     public void OnUnityAdsAdLoaded(string placementId)
@@ -49,7 +56,7 @@ public class RewardedAd : MonoBehaviour, IUnityAdsShowListener, IUnityAdsLoadLis
 
             if (_shopManager != null)
             {
-                _shopManager.DoblarPuntos();
+                _shopManager.TriplicarPuntos();
             }
             else
             {

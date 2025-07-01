@@ -22,6 +22,7 @@ public class AdsManager : MonoBehaviour
 
     public bool canUseAds = true;
     [SerializeField] RewardedAd _rewardedAd;
+    //[SerializeField] BannerAd _bannerAd;
 
     private void Start()
     {
@@ -30,10 +31,21 @@ public class AdsManager : MonoBehaviour
             _rewardedAd = GetComponent<RewardedAd>();
             _rewardedAd.LoadRewardedAd();
         }
+
+        //if (_bannerAd == null)
+        //{
+        //    _bannerAd = GetComponent<BannerAd>();
+        //    _bannerAd.RequestBanner();
+        //}
     }
 
     public void ExecuteRewardedAd()
     {
         _rewardedAd.ShowRewardedAd();
     }
+
+    //public void ExecuteBannerAd()
+    //{
+    //    _bannerAd.ShowBannerAd();
+    //}
 }
