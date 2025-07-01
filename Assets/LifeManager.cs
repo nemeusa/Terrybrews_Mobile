@@ -70,18 +70,18 @@ public class LifeSystem : MonoBehaviour
 
     void UpdateUI()
     {
-        textoVidas.text = "Vidas: " + _currentLives;
+        textoVidas.text = "" + _currentLives;
 
         if (_currentLives >= _maxLives)
         {
-            textoRecarga.text = "¡Máximo!";
+            textoRecarga.text = "¡Máx!";
         }
         else
         {
             TimeSpan restante = _nextLifeRecharge - DateTime.Now;
             if (restante.TotalSeconds > 0)
             {
-                textoRecarga.text = $"Siguiente vida en: {restante.Minutes:D2}:{restante.Seconds:D2}";
+                textoRecarga.text = $"Next life: {restante.Minutes:D2}:{restante.Seconds:D2}";
             }
             else
             {
@@ -92,7 +92,7 @@ public class LifeSystem : MonoBehaviour
         if (monedasActuales != null)
         {
             int monedas = PlayerPrefs.GetInt("Coins", 0);
-            monedasActuales.text = "Monedas: " + monedas;
+            monedasActuales.text = "" + monedas;
         }
     }
 
