@@ -18,6 +18,10 @@ public class Drink : MonoBehaviour
     [HideInInspector]
     public Client _client;
 
+    public bool isTutorial;
+
+    public bool bebidaEntregada;
+
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -40,13 +44,17 @@ public class Drink : MonoBehaviour
             Drink drink = GetComponent<Drink>();
             _client.ReceiveDrink(drink);
             Debug.Log("¡Bebida entregada al cliente!");
+            bebidaEntregada = true;
 
+            if (!isTutorial)
             Destroy(gameObject);
         }
         else
         {
             ResetDrinkPosition();
         }
+
+
     }
 
     private void OnTriggerEnter2D(Collider2D other)

@@ -11,14 +11,18 @@ public class ClientSpawn : MonoBehaviour
     [SerializeField] private Transform _chair;
     [SerializeField] private GameTimer _gameTimer;
 
+    public bool isTutorial;
+
     private float _timer;
 
     private void Start()
     {
-        SpawnCliente();
+        if (!isTutorial) SpawnCliente();
     }
     private void Update()
     {
+        if (isTutorial) return;
+
         _timer += Time.deltaTime;
 
         if (_timer >= tiempoEntreClientes)

@@ -8,7 +8,7 @@ public class PlayerDrag : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoi
     [SerializeField] private float _lerpSpeed = 5f;
    // [SerializeField] Transform _drinkPos;
     private Rigidbody2D _objectRb;
-    private bool _isDragging = false;
+    public bool _isDragging = false;
     private Vector2 _velocity = Vector2.zero;
     private Vector2 _worldPosition;
 
@@ -18,7 +18,7 @@ public class PlayerDrag : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoi
     //private bool _isOverClient = false;
     //private GameObject _clienteActual = null;
     //public Client _client;
-    [SerializeField] Drink _drink;
+    public Drink _drink;
 
 
     private void Awake()

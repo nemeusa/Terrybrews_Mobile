@@ -14,4 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Shop.unity
     guid: 695d3e33e462b504da8de475c19eac04
+  - enabled: 1
+    path: Assets/Scenes/MiniGame.unity
+    guid: daaa8b1b62df4d841bfca80dafffa07d
+  - enabled: 1
+    path: Assets/Scenes/Tutorial.unity
+    guid: bd6d53125fc7e6142abb2cd43fb41972
   m_configObjects: {}

@@ -1,7 +1,7 @@
-using UnityEngine;
-using UnityEngine.EventSystems;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Generator : MonoBehaviour, IPointerClickHandler
 {
@@ -12,6 +12,8 @@ public class Generator : MonoBehaviour, IPointerClickHandler
     public float tiempoMin = 3f;
     public float tiempoMax = 5f;
     public int maxObjectsInScene = 10;
+
+    public bool isTutorial = false;
 
     [Header("Rotura y Reparación")]
     [Range(0f, 1f)] public float breakChance = 0.1f;
@@ -34,6 +36,7 @@ public class Generator : MonoBehaviour, IPointerClickHandler
 
     [Header("Unity Cloud")]
     public bool ndGenerator = false;
+
 
 
     private void Start()
@@ -63,7 +66,7 @@ public class Generator : MonoBehaviour, IPointerClickHandler
         maxObjectsInScene = Mathf.Clamp(3 + levelMaxObjects, 3, 10);
 
         // Reducir tiempo de generación (de 10 a 5)
-        tiempoMin = Mathf.Clamp(10 - levelGenTime, 2,3);
+        tiempoMin = Mathf.Clamp(10 - levelGenTime, 2, 3);
         tiempoMax = Mathf.Clamp(10 - levelGenTime, 2, 10);
 
         // Reducir clics requeridos para reparar
@@ -90,30 +93,48 @@ public class Generator : MonoBehaviour, IPointerClickHandler
     {
         while (true)
         {
-            LimpiarLista(); 
 
-            if (!broken && objetosGenerados.Count < maxObjectsInScene)
+            if (!isTutorial)
             {
-                GameObject prefab = (Random.value < 0.5f) ? spawnedObject : spawnedObject2;
-                GameObject nuevoObjeto = Instantiate(prefab, spawnPoint.position, Quaternion.identity);
-                objetosGenerados.Add(nuevoObjeto);
 
-                if (Random.value < breakChance)
+
+                LimpiarLista();
+
+                if (!broken && objetosGenerados.Count < maxObjectsInScene)
                 {
-                   
-                    clickCounter = 0;
-                    Debug.Log("¡El generador se rompió!");
-                    GetComponent<Renderer>().material.color = newColor;
-                    spriteRenderer.sprite = roto;
-                    AudioManager.Instance.PlaySFXClip(0);
-                    broken = true;
-                }
-            }
+                  SpawnDrinks();
 
+                    if (Random.value < breakChance)
+                    {
+                        Broken();
+                    
+                    }
+                }
+
+            }
             float tiempoEspera = Random.Range(tiempoMin, tiempoMax);
             yield return new WaitForSeconds(tiempoEspera);
         }
     }
+
+    public void SpawnDrinks()
+    {
+        GameObject prefab = (Random.value < 0.5f) ? spawnedObject : spawnedObject2;
+        GameObject nuevoObjeto = Instantiate(prefab, spawnPoint.position, Quaternion.identity);
+        objetosGenerados.Add(nuevoObjeto);
+
+    }
+
+    public void Broken()
+    {
+        clickCounter = 0;
+        Debug.Log("¡El generador se rompió!");
+        GetComponent<Renderer>().material.color = newColor;
+        spriteRenderer.sprite = roto;
+        AudioManager.Instance.PlaySFXClip(0);
+        broken = true;
+    }
+
     private void LimpiarLista()
     {
         objetosGenerados.RemoveAll(obj => obj == null);
@@ -138,7 +159,7 @@ public class Generator : MonoBehaviour, IPointerClickHandler
                 actualColor = newColor;
             }
         }
-                StartCoroutine(clickRepare());
+        StartCoroutine(clickRepare());
     }
 
     IEnumerator clickRepare()

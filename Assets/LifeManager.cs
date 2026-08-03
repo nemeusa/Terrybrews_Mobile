@@ -19,6 +19,12 @@ public class LifeSystem : MonoBehaviour
         UpdateUI();
     }
 
+    void Update()
+    {
+        UpdateLifeUI();
+        //if (Input.GetKeyDown(KeyCode.L)) PerderVida(); // Simula perder vida
+    }
+
     void LifeChargeCheck()
     {
         if (_currentLives >= _maxLives) return;
@@ -30,6 +36,7 @@ public class LifeSystem : MonoBehaviour
             {
                 _nextLifeRecharge = DateTime.Now.AddMinutes(_reloadLifeTime);
                 PlayerPrefs.SetString("ProximaVida", _nextLifeRecharge.ToString());
+                NotificationController.instance.CreateNotification(_nextLifeRecharge);
             }
             GuardarDatos();
         }
@@ -62,13 +69,17 @@ public class LifeSystem : MonoBehaviour
         {
             _nextLifeRecharge = DateTime.Now.AddMinutes(_reloadLifeTime);
             PlayerPrefs.SetString("ProximaVida", _nextLifeRecharge.ToString());
+            #if UNITY_ANDROID
+
+                   NotificationController.instance.CreateNotification(_nextLifeRecharge);
+            #endif
         }
 
         GuardarDatos();
         UpdateUI();
     }
 
-    void UpdateUI()
+    void UpdateLifeUI()
     {
         textoVidas.text = "" + _currentLives;
 
@@ -89,6 +100,11 @@ public class LifeSystem : MonoBehaviour
             }
         }
 
+    }
+
+    void UpdateUI()
+    {
+        UpdateLifeUI();
         if (monedasActuales != null)
         {
             int monedas = PlayerPrefs.GetInt("Coins", 0);
@@ -130,9 +146,4 @@ public class LifeSystem : MonoBehaviour
         PlayerPrefs.Save();
     }
 
-    // Para testeo en editor
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.L)) PerderVida(); // Simula perder vida
-    }
 }

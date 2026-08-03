@@ -16,7 +16,7 @@ public class Client : MonoBehaviour
     [SerializeField] float _exitSpeed;
     [SerializeField] float _orderingTime;
     private float _orderTimer;
-    [HideInInspector]  
+    //[HideInInspector]  
     public Transform _servePoint;
     //[SerializeField] Transform _enterPoint;
     //[SerializeField] GameObject pedidoTexto;
@@ -27,6 +27,8 @@ public class Client : MonoBehaviour
     public bool _isOrdering;
     [SerializeField] bool quieto;
     bool _goodOrder;
+
+    public bool isTutorial;
 
     [HideInInspector]
     public GameTimer timer;
@@ -94,6 +96,8 @@ public class Client : MonoBehaviour
         //    // Debug.Log("tipo bueno");
         //    ColorXD();
         //}
+        if (isTutorial) return;
+
         wishDrink = RandomBeverage();
         Debug.Log("El cliente quiere: " + wishDrink);
 
@@ -109,7 +113,7 @@ public class Client : MonoBehaviour
         {
             transform.position = Vector3.zero;
         }
-        Destroy(gameObject, 15);
+        if(!isTutorial) Destroy(gameObject, 15);
     }
 
     private DrinkType RandomBeverage()
